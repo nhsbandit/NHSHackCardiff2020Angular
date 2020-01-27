@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ChartDataService, RequestResult } from '../app/chart-data.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NHSHackCardiff2020Angular';
+  data: RequestResult;
+
+  constructor(private chart: ChartDataService) {
+
+    this.chart.BoYaAData('').subscribe(results => {
+            if (results) {
+                // console.log(results);
+                this.data = results;
+                console.log(this.data.resultSet);
+            }
+        });
+
+   }
+
 }
